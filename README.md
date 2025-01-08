@@ -1,7 +1,7 @@
 # Image Registration Pipeline
 
 ## Overview
-This project provides a pipeline for registering brain(head) medical images (MRI and CT) to MNI152 space using fixed templates using ITK and elastix. The pipeline includes:
+This project provides a pipeline for registering brain(head) medical images (MRI and CT) to MNI152 space using fixed templates using ITK and elastix. It is inspired by the Slicer3D elastix registration, except its non-deformable. The pipeline includes:
 
 1. Registering MRI image and CT image to a standard templates.
 2. Registering CT to MRI.
