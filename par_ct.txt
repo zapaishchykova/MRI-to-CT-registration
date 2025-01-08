@@ -1,0 +1,78 @@
+// Parameter file for CT Registration
+// C-style comments: //
+
+// The internal pixel type, used for internal computations
+// For CT, keep as float for optimal computation precision.
+(FixedInternalImagePixelType "float")
+(MovingInternalImagePixelType "float")
+
+// **************** Main Components **************************
+
+(Registration "MultiResolutionRegistration")
+(Interpolator "BSplineInterpolator")
+(ResampleInterpolator "FinalBSplineInterpolator")
+(Resampler "DefaultResampler")
+
+// For CT images, RecursiveImagePyramids are appropriate.
+(FixedImagePyramid "FixedRecursiveImagePyramid")
+(MovingImagePyramid "MovingRecursiveImagePyramid")
+
+// Components critical for CT registration
+(Optimizer "AdaptiveStochasticGradientDescent")
+(Transform "EulerTransform") // Euler for rigid registration
+(Metric "AdvancedMattesMutualInformation") // MI is well-suited for multimodal or intensity-based CT alignment
+
+// ***************** Transformation **************************
+
+// Use automatic scale estimation for better parameter scaling
+(AutomaticScalesEstimation "true")
+(AutomaticTransformInitialization "true")
+(HowToCombineTransforms "Compose")
+
+// ******************* Similarity measure *********************
+
+// CT images often benefit from a slightly higher number of bins
+(NumberOfHistogramBins 32)
+
+// For CT, masks are often used to exclude air/background
+(ErodeMask "false")
+
+// ******************** Multiresolution **********************
+
+// Typically, 3-4 resolutions suffice for CT scans
+(NumberOfResolutions 4)
+
+// Pyramid schedule adjusted for typical 3D CT datasets
+(ImagePyramidSchedule 8 8 8  4 4 4  2 2 2  1 1 1)
+
+// ******************* Optimizer ****************************
+
+// For rigid CT registration, higher iteration count ensures robustness
+(MaximumNumberOfIterations 3000)
+
+// Use voxel size for step length, works well for CT
+// Uncomment if manual tuning is needed
+//(MaximumStepLength 1.0)
+
+// **************** Image sampling **********************
+
+// Use adaptive sampling with a sufficient number of points for CT
+(NumberOfSpatialSamples 3000)
+(NewSamplesEveryIteration "true")
+(ImageSampler "Random")
+
+// ************* Interpolation and Resampling ****************
+
+// B-Spline interpolation order for CT images, set to 3 for precision
+(BSplineInterpolationOrder 3)
+(FinalBSplineInterpolationOrder 3)
+
+// Default pixel value for out-of-bound regions
+(DefaultPixelValue -1000) // Typical CT background intensity
+
+// Enable generation of deformed moving image
+(WriteResultImage "true")
+
+// Result image settings for CT
+(ResultImagePixelType "short")
+(ResultImageFormat "mhd")
