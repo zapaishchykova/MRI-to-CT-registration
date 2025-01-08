@@ -38,5 +38,5 @@ python register.py
 
 
 ## License
-This project is open-source under the Apashe 2.0 License.
+This project is open-source under the Apache-2.0 license 
 
