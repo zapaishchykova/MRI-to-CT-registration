@@ -1,18 +1,17 @@
 # Image Registration Pipeline
 
 ## Overview
-This project provides a pipeline for registering medical images (MRI and CT) to fixed templates using ITK and elastix. The pipeline includes:
+This project provides a pipeline for registering brain(head) medical images (MRI and CT) to MNI152 space using fixed templates using ITK and elastix. The pipeline includes:
 
 1. Registering MRI image and CT image to a standard templates.
 2. Registering CT to MRI.
 
-## Features
-- Automatic MRI and CT image registration.
-- Overlay functionality to create larger, standardized images.
-- Two-stage elastix non-deformable registration.
+## What's special
+- Automatic MRI and CT image registration with *larger* images (including neck).
+- *Two-stage* non-deformable registration to ensure the best possible solution.
 
 ## Requirements
-Install the required dependencies by running:
+Install the required dependencies by running (feel free to use conda or anything else):
 ```bash
 pip install -r requirements.txt
 ```
